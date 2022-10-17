@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import About from "../components/About";
@@ -8,8 +8,23 @@ import Hero from "../components/Hero";
 import Projects from "../components/Projects";
 import Skills from "../components/Skills";
 import WorkExperience from "../components/WorkExperience";
+import { Experience, PageInfo, Project, Skill, Social } from "../typings";
+import { fetchExperiences } from "../utils/fetchExperiences";
+import { fetchPageInfo } from "../utils/fetchPageInfo";
+import { fetchProjects } from "../utils/fetchProjects";
+import { fetchSkills } from "../utils/fetchSkills";
+import { fetchSocials } from "../utils/fetchSocials";
 
-const Home: NextPage = () => {
+type Props = {
+  pageInfo: PageInfo,
+  experiences: Experience[],
+  skills: Skill[],
+  projects: Project[],
+  socials: Social[]
+}
+
+const Home = ({pageInfo, experiences, projects, skills, socials}: Props) => {
+ 
   return (
     <div className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll z-0 overflow-x-hidden scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#0099ff]">
       <Head>
@@ -19,31 +34,31 @@ const Home: NextPage = () => {
       </Head>
 
       {/* HEADER */}
-      <Header />
+      <Header socials={socials} />
 
       {/* HERO */}
       <section id="hero" className="snap-start">
-        <Hero />
+        <Hero pageInfo={pageInfo} />
       </section>
 
       {/* ABOUT */}
       <section className="snap-center" id="about">
-        <About />
+        <About pageInfo={pageInfo} />
       </section>
 
       {/* EXPERIENCE */}
       <section id="experience" className="snap-center">
-        <WorkExperience />
+        <WorkExperience experiences={experiences} />
       </section>
 
       {/* SKILL */}
       <section id="skills" className="snap-start">
-        <Skills />
+        <Skills skills={skills}/>
       </section>
 
       {/* PROJECTS */}
       <section id="projects" className="snap-start">
-        <Projects />
+        <Projects projects={projects} />
       </section>
 
       {/* CONTAC ME */}
@@ -63,3 +78,21 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const pageInfo: PageInfo = await fetchPageInfo();
+  const experiences: Experience[] = await fetchExperiences();
+  const skills: Skill[] = await fetchSkills();
+  const projects: Project[] = await fetchProjects();
+  const socials: Social[] = await fetchSocials();
+
+  return {
+    props: {
+      pageInfo,
+      experiences,
+      skills,
+      projects,
+      socials
+    }
+  }
+}
