@@ -18,15 +18,14 @@ import { fetchSkills } from "../utils/fetchSkills";
 import { fetchSocials } from "../utils/fetchSocials";
 
 type Props = {
-  pageInfo: PageInfo,
-  experiences: Experience[],
-  skills: Skill[],
-  projects: Project[],
-  socials: Social[]
-}
+  pageInfo: PageInfo;
+  experiences: Experience[];
+  skills: Skill[];
+  projects: Project[];
+  socials: Social[];
+};
 
-const Home = ({pageInfo, experiences, projects, skills, socials}: Props) => {
- 
+const Home = ({ pageInfo, experiences, projects, skills, socials }: Props) => {
   return (
     <div className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll z-0 overflow-x-hidden scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#0099ff]">
       <Head>
@@ -55,7 +54,7 @@ const Home = ({pageInfo, experiences, projects, skills, socials}: Props) => {
 
       {/* SKILL */}
       <section id="skills" className="snap-start">
-        <Skills skills={skills}/>
+        <Skills skills={skills} />
       </section>
 
       {/* PROJECTS */}
@@ -68,13 +67,17 @@ const Home = ({pageInfo, experiences, projects, skills, socials}: Props) => {
         <ContactMe />
       </section>
 
-      <Link href="#hero">
-        <footer className="sticky bottom-5 w-full  cursor-pointer">
-          <div className="flex items-center justify-center">
-            <img src="https://scontent-mia3-2.xx.fbcdn.net/v/t1.6435-9/104495140_4221166977895288_4958381441344414260_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=174925&_nc_ohc=YwxPajK05YIAX9zwixL&_nc_ht=scontent-mia3-2.xx&oh=00_AT-vBJjgR4jNr8ZtTRlKPfi3AWRYJoDYY-2iCMgcwb4zLw&oe=6356C1DA" alt="" className="h-10 w-10 rounded-full filter grayscale hover:grayscale-0 cursor-pointer" />
-          </div>
-        </footer>
-      </Link>
+      {/* <footer className="sticky bottom-5">
+        <div className="flex items-center justify-center">
+          <Link href="#hero">
+            <img
+              src="https://scontent-mia3-2.xx.fbcdn.net/v/t1.6435-9/104495140_4221166977895288_4958381441344414260_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=174925&_nc_ohc=YwxPajK05YIAX9zwixL&_nc_ht=scontent-mia3-2.xx&oh=00_AT-vBJjgR4jNr8ZtTRlKPfi3AWRYJoDYY-2iCMgcwb4zLw&oe=6356C1DA"
+              alt=""
+              className="h-10 w-10 rounded-full filter grayscale hover:grayscale-0 cursor-pointer"
+            />
+          </Link>
+        </div>
+      </footer> */}
     </div>
   );
 };
@@ -94,7 +97,7 @@ export const getStaticProps = async () => {
       experiences,
       skills,
       projects,
-      socials
-    }
-  }
-}
+      socials,
+    },
+  };
+};

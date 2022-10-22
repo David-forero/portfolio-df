@@ -34,7 +34,7 @@ const ExperienceCard = ({experience}: Props) => {
           }
         </div>
 
-        <p className="uppercase py-5 text-gray-300">{new Date(experience.dataStarted).toDateString()} - {experience.isCurrentlyWorkingHere ? "Actualidad" : new Date(experience.dataEnded).toDateString()}</p>
+        <p className="uppercase py-5 text-gray-300">{new Date(experience.dataStarted).toLocaleDateString("es-ES", {year: 'numeric', month: 'long', day: 'numeric'})} - {experience.isCurrentlyWorkingHere ? "Actualidad" : new Date(experience.dataEnded).toLocaleDateString("es-ES", {year: 'numeric', month: 'long', day: 'numeric'})}</p>
 
         <ul className="list-disc space-y-4 ml-5 text-lg max-h-96  overflow-y-scroll pr-5 scrollbar-thin scrollbar-track-black scrollbar-thumb-[#0099ff]">
            {
